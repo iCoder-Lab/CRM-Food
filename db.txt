@@ -71,7 +71,7 @@ CREATE TABLE `mealfororder` (
         REFERENCES orders(`id`)
         ON DELETE CASCADE,
   FOREIGN KEY (`mealid`)
-        REFERENCES meal(`id`)
+        REFERENCES meals(`id`)
         ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 -------------------------------
