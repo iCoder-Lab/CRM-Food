@@ -1,0 +1,77 @@
+CREATE DATABASE CRMFOOD;
+-------------------------------
+
+CREATE TABLE `roles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(122) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `roleid` int(11) NOT NULL,
+  `name` varchar(122) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`roleid`)
+        REFERENCES roles(`id`)
+        ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(122) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
+
+CREATE TABLE `meals` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(122) NOT NULL,
+  `categoryid` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`categoryid`)
+        REFERENCES categories(`id`)
+        ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
+
+CREATE TABLE `tables` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(122) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(122) NOT NULL,
+  `status` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `tableid` int(11) NOT NULL,
+  `date` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`userid`)
+        REFERENCES users(`id`)
+        ON DELETE CASCADE,
+  FOREIGN KEY (`tableid`)
+        REFERENCES tables(`id`)
+        ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
+
+CREATE TABLE `mealfororder` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(122) NOT NULL,
+  `orderid` int(11) NOT NULL,
+  `mealid` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`orderid`)
+        REFERENCES orders(`id`)
+        ON DELETE CASCADE,
+  FOREIGN KEY (`mealid`)
+        REFERENCES meal(`id`)
+        ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
