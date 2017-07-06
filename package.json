@@ -1,0 +1,14 @@
+{
+  "name": "crm-food",
+  "version": "1.0.0",
+  "description": "backend for crm-food",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "dependencies": {
+    "express": "^4.15.2"
+  },
+  "license": "ISC"
+}
