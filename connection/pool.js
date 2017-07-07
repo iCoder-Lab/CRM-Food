@@ -1,18 +1,18 @@
+
 var mysql = require('mysql')
 
-var connection = mysql.createConnection(
-  {
+var pool = mysql.createConnection
+({
     host: 'localhost',
     user: 'root',
-    password: 'root',
-    database: 'CRMFOOD'
-  }
-)
+    password: 'defender1145',
+    database: 'crm'
+})
 
-connection.connect(
-  function(error) {
-    if (error) throw error
-  }
-)
+pool.connect(function(error)
+{
+  console.log('connected to db, CRM-Food');
+  if (error) throw error;
+})
 
-module.exports = connection
+module.exports = pool
