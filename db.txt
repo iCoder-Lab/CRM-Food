@@ -3,15 +3,16 @@ CREATE DATABASE CRMFOOD;
 
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(122) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `roleid` int(11) NOT NULL,
-  `name` varchar(122) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`roleid`)
         REFERENCES roles(`id`)
@@ -21,15 +22,16 @@ CREATE TABLE `users` (
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(122) NOT NULL,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `meals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(122) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `categoryid` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`categoryid`)
         REFERENCES categories(`id`)
@@ -39,7 +41,7 @@ CREATE TABLE `meals` (
 
 CREATE TABLE `tables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(122) NOT NULL,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 -------------------------------
@@ -47,10 +49,10 @@ CREATE TABLE `tables` (
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(122) NOT NULL,
-  `status` int(11) NOT NULL,
+  `status` tinyint(4) NOT NULL,
   `userid` int(11) NOT NULL,
   `tableid` int(11) NOT NULL,
-  `date` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userid`)
         REFERENCES users(`id`)
