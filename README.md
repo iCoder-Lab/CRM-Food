@@ -14,10 +14,10 @@ There are three roles: admin, waiter and cooker
 
 ### post requests
 
- * /addTable  (Table)
- * /addWaiter (AddWaiter)
- * /addMealCategory (MealCategory)
- * /addMeal (Meal)
+ * /addTable  (Table)   
+ * /addWaiter (AddWaiter) -> 
+ * /addMealCategory (MealCategory)  -> categoryname
+ * /addMeal (Meal)                  -> mealname
  * /assignWaiterToTable (WaiterAndTable)
  * /removeWaiterFromTable (WaiterAndTable)
  
