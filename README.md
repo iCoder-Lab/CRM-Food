@@ -30,6 +30,8 @@ There are three roles: admin, waiter and cooker
   * /getMealsBy/{ MealCategoryId }  returns Array< Meal >
   * /getMyOrders returns Array< Order > 
   * /getCheck/{OrderId} returns Check
+  * /getAllMeals returns Array< Meal >
+  * /getAllRoles returns Array< Role >
   
  ### post requests
   * /order (Order)
@@ -65,6 +67,10 @@ There are three roles: admin, waiter and cooker
     "id": Int,             //used only for get requests
     "name": String,
     "price": Int
+    
+### Role
+    "id": Int,
+    "name": String
     
 ### WaiterAndTable
     "waiterId": String,
