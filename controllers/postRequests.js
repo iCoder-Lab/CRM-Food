@@ -6,7 +6,7 @@ const bP = require('body-parser').json()
 module.exports = function(app)
 {
   //----------------------- Add Category-------------------------------//
-  app.post('/addCategory', bP, function(request, response)
+  app.post('/addMealCategory', bP, function(request, response)
   {
     var file = request.body
     var name = file.name
@@ -159,4 +159,65 @@ module.exports = function(app)
     })
   })
 
+  app.post('/addTable', bP, function(request, response)
+  {
+    var file = request.body
+    var name = file.name
+    const _checkName = 'select name from tables where name = ' + pool.escape(name)
+
+    pool.query(_checkName, function(err, res)
+    {
+      if(err)
+      {
+        response.status(500).send({error: 'query failed'})
+      }
+
+      else if(res.length > 0)
+      {
+        response.status(400).send({error: name + ' table exists.'})
+      }
+
+      else
+      {
+        const insertTable = 'insert into tables(name) values(' + pool.escape(name) + ');'
+        pool.query(insertTable, function(error, result)
+        {
+          if(error)
+          {
+            response.status(500).send({error: 'query failed: ' + error})
+          }
+
+          else
+          {
+            response.send(name + ' table has been added.')
+          }
+        })
+      }
+    })
+  })
+
+  app.post('/addWaiter', bP, function(request, response)
+  {
+    var file = request.body
+    var name = file.name
+    var surname = file.surname
+    var login = file.login
+    var password = file.password
+
+    const insertWaiter = 'insert into users(name, roleid, surname, login, password) values' +
+    '(' + pool.escape(name) + ', ' + 2 + ', ' + pool.escape(surname) + ', ' + pool.escape(login) + ', ' + pool.escape(password) + ')'
+
+    pool.query(insertWaiter, function(error, result)
+    {
+      if(error)
+      {
+        response.status(500).send({error: 'query failed: ' + error})
+      }
+
+      else
+      {
+        response.send(name + ' ' + surname + ' has been added as a Waiter')
+      }
+    })
+  })
 }
