@@ -74,19 +74,18 @@ There are three roles: admin, waiter and cooker
     "name": String
     
 ### WaiterAndTable
-    "waiterid": String,
-    "tableId": String
+    "waiterid": Int,
+    "tableid": Int
     
 ### Order
     "id": Int,             //used only for get requests
-    "waiterid": String,
-    "table": Int,
-    "meals" : Array<Meal>
+    "waiterid": Int,
+    "tableid": Int,
+    "meals" : Array<"mealid": Int>
     
 ### Check
-    "orderId" : String,
-    "orderSum": Int,
-    "serviceFee": Int,
-    "totalSum": Int
-  
+    "orderid" : Int,
+    "ordersum": Int,
+    "servicefee": Int,
+    "totalsum": Int
   
