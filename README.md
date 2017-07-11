@@ -18,8 +18,8 @@ There are three roles: admin, waiter and cooker
  * /addWaiter (Waiter) -> 
  * /addMealCategory (MealCategory)  -> categoryname
  * /addMeal (Meal)                  -> mealname
- * /assignWaiterToTable (WaiterAndTable)
- * /removeWaiterFromTable (WaiterAndTable)
+ * /assignWaiterToTable (WaiterAndTable) !!!!
+ * /removeWaiterFromTable (WaiterAndTable)  !!!!
  
  ### get requests
   
