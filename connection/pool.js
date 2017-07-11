@@ -4,8 +4,8 @@ var pool = mysql.createConnection
 ({
     host: 'localhost',
     user: 'root',
-    password: 'defender1145',
-    database: 'crm'
+    password: 'root',
+    database: 'crmfood'
 })
 
 pool.connect(function(error)

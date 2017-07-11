@@ -51,7 +51,6 @@ CREATE TABLE `tables` (
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(122) NOT NULL,
   `status` tinyint(4) NOT NULL,
   `userid` int(11) NOT NULL,
   `tableid` int(11) NOT NULL,
@@ -68,7 +67,6 @@ CREATE TABLE `orders` (
 
 CREATE TABLE `mealfororder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(122) NOT NULL,
   `orderid` int(11) NOT NULL,
   `mealid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
