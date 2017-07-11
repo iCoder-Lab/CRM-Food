@@ -5,10 +5,10 @@ const bP = require('body-parser').json()
 
 module.exports = function(app)
 {
-  app.post('/addOrder', bP, function(request, response)
-  {
-    var file = request.body
-    var waiterId = file.waiterId
-    var tableId
-  }
+  // app.post('/addOrder', bP, function(request, response)
+  // {
+  //   var file = request.body
+  //   var waiterId = file.waiterId
+  //   var tableId
+  // }
 }

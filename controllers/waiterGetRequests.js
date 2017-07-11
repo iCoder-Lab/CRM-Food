@@ -20,7 +20,7 @@ module.exports = function(app)
         }
         else if(res.length > 0)
         {
-          response.json({res})
+          response.json(res)
         }
 
         else
@@ -49,7 +49,7 @@ module.exports = function(app)
 
       else if(res.length > 0)
       {
-        response.json({res})
+        response.json(res)
       }
 
       else
@@ -59,7 +59,7 @@ module.exports = function(app)
     })
   })
 
-  app.get('/getMealsBy/:categoryid', function(request, response)
+  app.get('/getMealsByCategory/:categoryid', function(request, response)
   {
     var inp = request.params.categoryid
     if(Number.isInteger(parseInt(inp)) && inp > 0)
@@ -76,12 +76,45 @@ module.exports = function(app)
 
         else if(res.length > 0)
         {
-          response.json({res})
+          response.json(res)
         }
 
         else
         {
           response.status(404).send({error: 'no meal found'})
+        }
+      })
+    }
+
+    else
+    {
+      response.send('Category id should be a positive integer value')
+    }
+
+  })
+
+  app.get('/getMealById/:mealid', function(request, response)
+  {
+    var inp = request.params.mealid
+    if(Number.isInteger(parseInt(inp)) && inp > 0)
+    {
+      const mealid = parseInt(inp)
+      const _query = 'select id, name, price from meals where id = ' + pool.escape(mealid)
+      pool.query(_query, function(err, res)
+      {
+        if(err)
+        {
+          response.status(500).send({error: 'query failed ' + err})
+        }
+
+        else if(res.length > 0)
+        {
+          response.json(res[0])
+        }
+
+        else
+        {
+          response.status(404).send({error: 'no meal with id ' + mealid + ' found'})
         }
       })
     }
@@ -115,7 +148,7 @@ module.exports = function(app)
 
       else if(res.length > 0)
       {
-        response.json({res})
+        response.json(res)
       }
 
       else
@@ -125,25 +158,56 @@ module.exports = function(app)
     })
   })
 
-  app.get('/getMyOrders', function(request, response)
+  app.get('/getMyOrders/:userid', function(request, response)
   {
-    const _query = 'select name as role from roles'
-    pool.query(_query, function(err, res)
+    var inp = request.params.userid
+    if(Number.isInteger(parseInt(inp)))
     {
-      if(err)
-      {
-        response.status(500).send({error: 'query failed ' + err})
-      }
+      const userid = parseInt(inp)
 
-      else if(res.length > 0)
+      const _query = 'select o.id as id, o.userid as waiterid, o.tableid as tableid, ' +
+      'm.id as mealid, m.name as mealname, m.price as mealprice from orders o inner join ' +
+      'mealfororders mfo on o.id = mfo.orderid inner join meals m on m.id = mfo.mealid ' +
+      'where o.userid = ' + pool.escape(userid)
+      pool.query(_query, function(err, res)
       {
-        response.json({res})
-      }
+        if(err)
+        {
+          response.status(500).send({error: 'query failed ' + err})
+        }
 
-      else
-      {
-        response.status(404).send({error: 'no role found'})
-      }
-    })
+        else if(res.length > 0)
+        {
+          /*var r = JSON.stringify(res)
+          var obj = {}
+          for(var i = 0; i < r.length; i++)
+          {
+
+              obj.waiterid = r[0].waiter
+              obj.id = r[i].id
+              obj.tableid = r[i].tableid
+              obj.id[r[i].id].mealid = r[i].mealid
+              obj.id[r[i].id].mealname = r[i].mealname
+              obj.id[r[i].id].mealprice = r[i].mealprice
+          }*/
+          response.json(res)
+          //response.json(obj)
+        }
+
+        else
+        {
+          response.status(404).send({error: 'no any order for current userid found.'})
+        }
+      })
+    }
+
+    else
+    {
+      response.send({result: "Incorrect Integer value " + inp})
+    }
+
   })
+
+
+
 }

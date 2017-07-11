@@ -10,11 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/iCoder-Lab/CRM-Food.git"
   },
-<<<<<<< HEAD
-  "author": "Saitbaev Mamurjon",
-=======
   "author": "iCoder",
->>>>>>> da959779d259fd44ea7a47f9fe8c2950ee09cc90
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/iCoder-Lab/CRM-Food/issues"
