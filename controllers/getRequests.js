@@ -9,9 +9,9 @@ module.exports = function(app)
   *   GET CATEGORIES
   *
   */
-  app.get('/getAllCategories', function(request, response)
+  app.get('/getMealCategories', function(request, response)
   {
-      const _query = 'select id as categoryid, name as category from categories'
+      const _query = 'select id as id, name as name from categories'
       pool.query(_query, function(err, res)
       {
         if(err)
@@ -59,13 +59,13 @@ module.exports = function(app)
     })
   })
 
-  app.get('/getMealsById/:categoryid', function(request, response)
+  app.get('/getMealsBy/:categoryid', function(request, response)
   {
     var inp = request.params.categoryid
     if(Number.isInteger(parseInt(inp)) && inp > 0)
     {
       const categoryid = parseInt(inp)
-      const _query = 'select m.name as meal, m.price from meals m inner join categories c ' +
+      const _query = 'select m.id as id, m.name as name, m.price as price from meals m inner join categories c ' +
       'on c.id = m.categoryid where c.id = ' + pool.escape(categoryid)
       pool.query(_query, function(err, res)
       {
@@ -100,7 +100,32 @@ module.exports = function(app)
   *
   */
 
+////------------------------------------------------------------------------////
+
+
   app.get('/getAllRoles', function(request, response)
+  {
+    const _query = 'select name as role from roles'
+    pool.query(_query, function(err, res)
+    {
+      if(err)
+      {
+        response.status(500).send({error: 'query failed ' + err})
+      }
+
+      else if(res.length > 0)
+      {
+        response.json({res})
+      }
+
+      else
+      {
+        response.status(404).send({error: 'no role found'})
+      }
+    })
+  })
+
+  app.get('/getMyOrders', function(request, response)
   {
     const _query = 'select name as role from roles'
     pool.query(_query, function(err, res)
