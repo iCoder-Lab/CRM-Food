@@ -2,8 +2,11 @@
 
 
 # Get requests
+
 Orders:       /getNewOrders
+
 Orders:       /getInProgressOrders
+
 Orders:       /getDoneOrders
 
 # Post requests
