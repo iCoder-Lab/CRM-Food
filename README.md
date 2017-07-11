@@ -81,7 +81,7 @@ There are three roles: admin, waiter and cooker
     "id": Int,             //used only for get requests
     "waiterid": Int,
     "tableid": Int,
-    "meals" : Array<Meal>
+    "meals" : Array<mealid>
     
 ### Check
     "orderid" : Int,
