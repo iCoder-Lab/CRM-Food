@@ -11,13 +11,11 @@ Orders:       /getInProgressOrders
 Orders:       /getDoneOrders
 
 # Post requests
-
 There are three roles: admin, waiter and cooker 
 
 ### post requests
-
  * /addTable  (Table)   
- * /addWaiter (Waiter) -> 
+ * /addWaiter (User) -> 
  * /addMealCategory (MealCategory)  
  * /addMeal (Meal)      
 
@@ -53,9 +51,10 @@ There are three roles: admin, waiter and cooker
     "id": Int,             //used only for get requests
     "number": Int
     
- ### Waiter
+ ### User
     "id": Int,             //used only for get requests
     "name": String,
+    "roleid": Int,
     "surname": String,
     "login": String,
     "password": String,
