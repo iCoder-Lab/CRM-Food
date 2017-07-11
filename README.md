@@ -1,5 +1,6 @@
 # CRM-Food. 
 
+## Admin: 
 
 # Get requests
 
@@ -12,8 +13,6 @@ Orders:       /getDoneOrders
 # Post requests
 
 There are three roles: admin, waiter and cooker 
-
-## Admin: 
 
 ### post requests
 
