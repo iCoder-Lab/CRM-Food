@@ -1,9 +1,9 @@
-var app = require('express')()
-var gets = require('./controllers/getRequests')
-var posts = require('./connection/postRequests')
+var express = require('express')
+var getRequests = require('./controllers/getRequests')
+var postRequests = require('./controllers/postRequests')
 
-gets(app)
-posts(app)
-
-app.listen(3000)
-console.log('Listening 3000')
+var app = express()
+getRequests(app)
+postRequests(app)
+app.listen(3000, '')
+console.log('Listening to CRM-Food -> 3000')
