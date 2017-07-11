@@ -29,7 +29,7 @@ There are three roles: admin, waiter and cooker
   * /getMealsByCategory/{ MealCategoryId }  returns Array< Meal >
   * /getMealById/{mealid} returns Meal
   * /getMyOrders/{userid} returns Array< Order > 
-  * /getCheck/{OrderId} returns Check
+  * /getCheck/{Orderid} returns Check
   * /getAllMeals returns Array< Meal >
   * /getAllRoles returns Array< Role >
   
@@ -39,11 +39,11 @@ There are three roles: admin, waiter and cooker
   
 ## Sockets
   * /delivered
-    -> OrderId, MealId 
+    -> Orderid, Mealid 
   * /cooking
-    -> OrderId, MealId
+    -> Orderid, Mealid
   * /doneCooking
-    -> OrderId, MealId
+    -> Orderid, Mealid
     
 # Models
  
@@ -58,7 +58,7 @@ There are three roles: admin, waiter and cooker
     "surname": String,
     "login": String,
     "password": String,
-    "dateOfAdd": String, //timestamp
+    "dateofadd": String, //timestamp
     
  ### MealCategory
     "id": Int,             //used only for get requests
@@ -74,12 +74,12 @@ There are three roles: admin, waiter and cooker
     "name": String
     
 ### WaiterAndTable
-    "waiterId": String,
+    "waiterid": String,
     "tableId": String
     
 ### Order
     "id": Int,             //used only for get requests
-    "waiterId": String,
+    "waiterid": String,
     "table": Int,
     "meals" : Array<Meal>
     
