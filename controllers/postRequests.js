@@ -3,7 +3,6 @@ const pool = require('../connection/pool')
 const bP = require('body-parser').json()
 
 module.exports = function(app) {
-  //----------------------- Add Category-------------------------------//
   app.post('/addMealCategory', bP, function(request, response) {
     var file = request.body
     var name = file.name
@@ -30,31 +29,12 @@ module.exports = function(app) {
     })
   })
 
-  //----------------------- Add Meal-------------------------------//
-
   app.post('/addMeal', bP, function(request, response) {
     var file = request.body
     var name = file.name
     var categoryid = file.categoryid
     var price = file.price
 
-    // var cID = -1
-    // const checkCategoryID = 'select max(id) as id from categories'
-    // pool.query(checkCategoryID, function(error, result)
-    // {
-    //   if(error)
-    //   {
-    //     response.status(500).send({error: 'query failed: ' + error})
-    //   }
-    //
-    //   else
-    //   {
-    //       cID = parseInt(result[0].id)
-    //       console.log(result[0].id);
-    //   }
-    // })
-
-    //console.log("cat id: " + cID);
     if(Number.isInteger(parseInt(categoryid)) && categoryid > 0) {
       if(Number.isInteger(parseInt(price)) && price >= 0) {
         const _checkName = 'select name from meals where name = ' + pool.escape(name)

@@ -10,9 +10,13 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `roleid` int(11) NOT NULL,
+  `roleid` int(11) NULL,
+  `surname` varchar(255) NOT NULL,
+  `login` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `dateofadd` TIMESTAMP NULL DEFAULT CURDATE(),
   `name` varchar(255) NOT NULL,
-  `phone` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`roleid`)
         REFERENCES roles(`id`)
