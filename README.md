@@ -15,7 +15,7 @@ There are three roles: admin, waiter and cooker
 ### post requests
 
  * /addTable  (Table)   
- * /addWaiter (AddWaiter) -> 
+ * /addWaiter (Waiter) -> 
  * /addMealCategory (MealCategory)  -> categoryname
  * /addMeal (Meal)                  -> mealname
  * /assignWaiterToTable (WaiterAndTable)
@@ -46,12 +46,11 @@ There are three roles: admin, waiter and cooker
 # Models
  
 ### Table
-  
-    "id": String,
+    "id": Int,             //used only for get requests
     "number": Int
     
- ### AddWaiter
- 
+ ### Waiter
+    "id": Int,             //used only for get requests
     "name": String,
     "surname": String,
     "login": String,
@@ -59,30 +58,25 @@ There are three roles: admin, waiter and cooker
     "dateOfAdd": String, //timestamp
     
  ### MealCategory
- 
-    "id": String,
+    "id": Int,             //used only for get requests
     "name": String
     
  ### Meal
-    
-    "id": String,
+    "id": Int,             //used only for get requests
     "name": String,
     "price": Int
     
 ### WaiterAndTable
-    
     "waiterId": String,
     "tableId": String
     
 ### Order
-
-    "id": String,
+    "id": Int,             //used only for get requests
     "waiterId": String,
     "table": Int,
     "meals" : Array<Meal>
     
 ### Check
-
     "orderId" : String,
     "orderSum": Int,
     "serviceFee": Int,
