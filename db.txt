@@ -18,10 +18,9 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `phone` varchar(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`roleid`)
-        REFERENCES roles(`id`)
-        ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+  KEY `roleid` (`roleid`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`roleid`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `categories` (

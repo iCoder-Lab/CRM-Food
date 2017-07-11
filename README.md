@@ -1,25 +1,26 @@
 # CRM-Food. 
 
+## Admin: 
 
 # Get requests
+
 Orders:       /getNewOrders
+
 Orders:       /getInProgressOrders
+
 Orders:       /getDoneOrders
 
 # Post requests
 
 There are three roles: admin, waiter and cooker 
 
-## Admin: 
-
 ### post requests
 
  * /addTable  (Table)   
- * /addWaiter (AddWaiter) -> 
- * /addMealCategory (MealCategory)  -> categoryname
- * /addMeal (Meal)                  -> mealname
- * /assignWaiterToTable (WaiterAndTable)
- * /removeWaiterFromTable (WaiterAndTable)
+ * /addWaiter (Waiter) -> 
+ * /addMealCategory (MealCategory)  
+ * /addMeal (Meal)      
+
  
  ### get requests
   
@@ -27,13 +28,16 @@ There are three roles: admin, waiter and cooker
 
  ### get requests
   * /getMealCategories returns Array< MealCategory >
-  * /getMealsBy/{ MealCategoryId }  returns Array< Meal >
-  * /getMyOrders returns Array< Order > 
+  * /getMealsByCategory/{ MealCategoryId }  returns Array< Meal >
+  * /getMealById/{mealid} returns Meal
+  * /getMyOrders/{userid} returns Array< Order > 
   * /getCheck/{OrderId} returns Check
+  * /getAllMeals returns Array< Meal >
+  * /getAllRoles returns Array< Role >
   
  ### post requests
-  * /order (Order)
-  * /addMealsToOrder (Order with id) 
+  * /addOrder (Order)
+  * /addMealsToOrder/{orderid}(Order with id) 
   
 ## Sockets
   * /delivered
@@ -46,12 +50,11 @@ There are three roles: admin, waiter and cooker
 # Models
  
 ### Table
-  
-    "id": String,
+    "id": Int,             //used only for get requests
     "number": Int
     
- ### AddWaiter
- 
+ ### Waiter
+    "id": Int,             //used only for get requests
     "name": String,
     "surname": String,
     "login": String,
@@ -59,30 +62,29 @@ There are three roles: admin, waiter and cooker
     "dateOfAdd": String, //timestamp
     
  ### MealCategory
- 
-    "id": String,
+    "id": Int,             //used only for get requests
     "name": String
     
  ### Meal
-    
-    "id": String,
+    "id": Int,             //used only for get requests
     "name": String,
     "price": Int
     
-### WaiterAndTable
+### Role
+    "id": Int,
+    "name": String
     
+### WaiterAndTable
     "waiterId": String,
     "tableId": String
     
 ### Order
-
-    "id": String,
+    "id": Int,             //used only for get requests
     "waiterId": String,
     "table": Int,
     "meals" : Array<Meal>
     
 ### Check
-
     "orderId" : String,
     "orderSum": Int,
     "serviceFee": Int,
