@@ -18,10 +18,9 @@ There are three roles: admin, waiter and cooker
 
  * /addTable  (Table)   
  * /addWaiter (Waiter) -> 
- * /addMealCategory (MealCategory)  -> categoryname
- * /addMeal (Meal)                  -> mealname
- * /assignWaiterToTable (WaiterAndTable) !!!!
- * /removeWaiterFromTable (WaiterAndTable)  !!!!
+ * /addMealCategory (MealCategory)  
+ * /addMeal (Meal)      
+
  
  ### get requests
   
@@ -29,15 +28,16 @@ There are three roles: admin, waiter and cooker
 
  ### get requests
   * /getMealCategories returns Array< MealCategory >
-  * /getMealsBy/{ MealCategoryId }  returns Array< Meal >
-  * /getMyOrders returns Array< Order > 
+  * /getMealsByCategory/{ MealCategoryId }  returns Array< Meal >
+  * /getMealById/{mealid} returns Meal
+  * /getMyOrders/{userid} returns Array< Order > 
   * /getCheck/{OrderId} returns Check
   * /getAllMeals returns Array< Meal >
   * /getAllRoles returns Array< Role >
   
  ### post requests
-  * /order (Order)
-  * /addMealsToOrder (Order with id) 
+  * /addOrder (Order)
+  * /addMealsToOrder/{orderid}(Order with id) 
   
 ## Sockets
   * /delivered
