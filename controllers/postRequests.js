@@ -1,6 +1,5 @@
 const Promise = require('bluebird')
 const pool = require('../connection/pool')
-const Errors = require('./errors')
 const bP = require('body-parser').json()
 
 module.exports = function(app) {
