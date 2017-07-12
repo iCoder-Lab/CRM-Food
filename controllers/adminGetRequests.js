@@ -1,6 +1,5 @@
 const Promise = require('bluebird')
 const pool = require('../connection/pool')
-const Errors = require('./errors')
 
 module.exports = function(app)
 {
@@ -8,17 +7,17 @@ module.exports = function(app)
 
   app.get('/getNewOrders', function(request, response)
   {
-    const _query = 'select id, userid, tableid, date from orders where status = -1'
+    const _query = 'select id, userid, tableid, DATE_FORMAT(CONVERT_TZ(date, \'+00:00\',\'+0:00\'), \'%e-%M %Y %H:%i:%s\') as date from orders where status = -1'
     pool.query(_query, function(err, res)
     {
       if(err)
       {
-        response.status(500).send({error: 'query failed ' + err})
+        response.status(500).send({error: err})
       }
 
       else if(res.length > 0)
       {
-        response.json({res})
+        response.json(res)
       }
 
       else
@@ -32,17 +31,17 @@ module.exports = function(app)
 
   app.get('/getInProgressOrders', function(request, response)
   {
-    const _query = 'select id, userid, tableid, date from orders where status = 0'
+    const _query = 'select id, userid, tableid, DATE_FORMAT(CONVERT_TZ(date, \'+00:00\',\'+0:00\'), \'%e-%M %Y %H:%i:%s\') as date from orders where status = 0'
     pool.query(_query, function(err, res)
     {
       if(err)
       {
-        response.status(500).send({error: 'query failed ' + err})
+        response.status(500).send({error: err})
       }
 
       else if(res.length > 0)
       {
-        response.json({res})
+        response.json(res)
       }
 
       else
@@ -56,17 +55,17 @@ module.exports = function(app)
 
   app.get('/getDoneOrders', function(request, response)
   {
-    const _query = 'select id, userid, tableid, date from orders where status = 1'
+    const _query = 'select id, userid, tableid, DATE_FORMAT(CONVERT_TZ(date, \'+00:00\',\'+0:00\'), \'%e-%M %Y %H:%i:%s\') as date from orders where status = 1'
     pool.query(_query, function(err, res)
     {
       if(err)
       {
-        response.status(500).send({error: 'query failed ' + err})
+        response.status(500).send({error: err})
       }
 
       else if(res.length > 0)
       {
-        response.json({res})
+        response.json(res)
       }
 
       else
