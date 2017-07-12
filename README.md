@@ -67,6 +67,7 @@ There are three roles: admin, waiter and cooker
  ### Meal
     "id": Int,             //used only for get requests
     "name": String,
+    "categoryid": Int,
     "price": Int
     
 ### Role
