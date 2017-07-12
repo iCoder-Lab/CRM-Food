@@ -15,7 +15,7 @@ There are three roles: admin, waiter and cooker
 
 ### post requests
  * /addTable  (Table)   
- * /addWaiter (User) -> 
+ * /addUser (User) -> 
  * /addMealCategory (MealCategory)  
  * /addMeal (Meal)      
 
@@ -53,12 +53,12 @@ There are three roles: admin, waiter and cooker
     
  ### User
     "id": Int,             //used only for get requests
-    "name": String,
-    "roleid": Int,
+    "name": String,    
     "surname": String,
     "login": String,
     "password": String,
-    "dateofadd": String, //timestamp
+    "roleid": Int,
+    "dateofadd": String, //timestamp // No need to add. Added Automatically
     
  ### MealCategory
     "id": Int,             //used only for get requests
