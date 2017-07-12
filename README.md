@@ -49,7 +49,7 @@ There are three roles: admin, waiter and cooker
  
 ### Table
     "id": Int,             //used only for get requests
-    "number": Int
+    "name": String
     
  ### User
     "id": Int,             //used only for get requests
