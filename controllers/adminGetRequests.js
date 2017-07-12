@@ -3,8 +3,6 @@ const pool = require('../connection/pool')
 
 module.exports = function(app)
 {
-  /*Get new orders**/
-
   app.get('/getNewOrders', function(request, response)
   {
     const _query = 'select id, userid, tableid, DATE_FORMAT(CONVERT_TZ(date, \'+00:00\',\'+0:00\'), \'%e-%M %Y %H:%i:%s\') as date from orders where status = -1'
@@ -27,8 +25,6 @@ module.exports = function(app)
     })
   })
 
-  /*Get in progress orders*/
-
   app.get('/getInProgressOrders', function(request, response)
   {
     const _query = 'select id, userid, tableid, DATE_FORMAT(CONVERT_TZ(date, \'+00:00\',\'+0:00\'), \'%e-%M %Y %H:%i:%s\') as date from orders where status = 0'
@@ -50,8 +46,6 @@ module.exports = function(app)
       }
     })
   })
-
-  /*get new orders*/
 
   app.get('/getDoneOrders', function(request, response)
   {
