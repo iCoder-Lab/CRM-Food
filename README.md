@@ -35,7 +35,7 @@ There are three roles: admin, waiter and cooker
   
  ### post requests
   * /addOrder (Order)              //No meals
-  * /addMealsToOrder/{orderid}(Order with id) 
+  * /addMealsToOrder/(Order with id) 
   
     Example, /addMealsToOrder: 
        {
