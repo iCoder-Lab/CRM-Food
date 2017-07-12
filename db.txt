@@ -77,4 +77,4 @@ CREATE TABLE `mealfororder` (
         REFERENCES meals(`id`)
         ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
--------------------------------
+------------------------------
