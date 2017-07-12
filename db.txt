@@ -1,5 +1,5 @@
 CREATE DATABASE CRMFOOD;
--------------------------------
+------------------------------
 
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
