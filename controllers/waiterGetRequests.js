@@ -74,6 +74,39 @@ module.exports = function(app) {
     }
   })
 
+  app.get('/getMealById/:mealid', function(request, response)
+  {
+    var inp = request.params.mealid
+    if(Number.isInteger(parseInt(inp)) && inp > 0)
+    {
+      const mealid = parseInt(inp)
+      const _query = 'select id, name, price from meals where id = ' + pool.escape(mealid)
+      pool.query(_query, function(err, res)
+      {
+        if(err)
+        {
+          response.status(500).send({error: 'query failed ' + err})
+        }
+
+        else if(res.length > 0)
+        {
+          response.json(res[0])
+        }
+
+        else
+        {
+          response.status(404).send({error: 'no meal with id ' + mealid + ' found'})
+        }
+      })
+    }
+
+    else
+    {
+      response.send('Category id should be a positive integer value')
+    }
+
+  })
+
   /*
   *
   *

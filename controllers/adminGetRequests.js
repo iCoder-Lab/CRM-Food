@@ -8,7 +8,7 @@ module.exports = function(app)
 
   app.get('/getNewOrders', function(request, response)
   {
-    const _query = 'select id, name from roles'
+    const _query = 'select id, userid, tableid, date from orders where status = -1'
     pool.query(_query, function(err, res)
     {
       if(err)
@@ -23,7 +23,7 @@ module.exports = function(app)
 
       else
       {
-        response.status(404).send({error: 'no role found'})
+        response.status(404).send({error: 'no new orders found'})
       }
     })
   })
@@ -32,7 +32,7 @@ module.exports = function(app)
 
   app.get('/getInProgressOrders', function(request, response)
   {
-    const _query = 'select id, name from roles'
+    const _query = 'select id, userid, tableid, date from orders where status = 0'
     pool.query(_query, function(err, res)
     {
       if(err)
@@ -47,16 +47,16 @@ module.exports = function(app)
 
       else
       {
-        response.status(404).send({error: 'no role found'})
+        response.status(404).send({error: 'no in progress orders found'})
       }
     })
   })
 
   /*get new orders*/
 
-  app.get('/getNewOrders', function(request, response)
+  app.get('/getDoneOrders', function(request, response)
   {
-    const _query = 'select id, name from roles'
+    const _query = 'select id, userid, tableid, date from orders where status = 1'
     pool.query(_query, function(err, res)
     {
       if(err)
@@ -71,7 +71,7 @@ module.exports = function(app)
 
       else
       {
-        response.status(404).send({error: 'no role found'})
+        response.status(404).send({error: 'no done orders found'})
       }
     })
   })
