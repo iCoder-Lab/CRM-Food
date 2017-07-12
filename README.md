@@ -71,7 +71,7 @@ There are three roles: admin, waiter and cooker
     "price": Int
     
 ### Role
-    "id": Int,
+    "id": Int,             // Used only for get requests
     "name": String
     
 ### WaiterAndTable
