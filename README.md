@@ -34,8 +34,16 @@ There are three roles: admin, waiter and cooker
   * /getAllRoles returns Array< Role >
   
  ### post requests
-  * /addOrder (Order)
+  * /addOrder (Order)              //No meals
   * /addMealsToOrder/{orderid}(Order with id) 
+  
+    Example, /addMealsToOrder: 
+       {
+          "orderid": 1,
+          "meals" : [ 1, 2, 3 ]   //Array of meal ids
+       }
+       
+        
   
 ## Sockets
   * /delivered
