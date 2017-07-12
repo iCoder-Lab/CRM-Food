@@ -23,14 +23,15 @@ module.exports = function(app) {
     var file = request.body
     var orderid = file.orderid
     var meals = file.meals
-    // const insertOrder = 'insert into orders(status, userid, tableid) values(-1, ' + waiterid + ', ' + tableid + ');'
-    // pool.query(insertOrder, function(error, result) {
-    //   if(error) {
-    //     response.status(500).send({error: 'query failed: ' + error})
-    //   }
-    //   else {
-    //     response.send({message: 'order has been added.'})
-    //   }
-    // })
+    for(var i = 0; i < meals.length; i++) {
+      const addToOrder = 'insert into mealfororder(orderid, mealid) values(' + orderid + ', ' + meals[i] + ');'
+      pool.query(addToOrder, function(error, result) {
+        if(error) {
+          response.status(500).send({error: 'query failed: ' + error})
+          return
+        }
+      })
+    }
+    response.json({message: 'meals have been added.'})
   })
 }
