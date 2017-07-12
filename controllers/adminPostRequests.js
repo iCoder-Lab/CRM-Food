@@ -1,6 +1,5 @@
 const Promise = require('bluebird')
 const pool = require('../connection/pool')
-const Errors = require('./errors')
 const bP = require('body-parser').json()
 
 module.exports = function(app)
@@ -15,7 +14,7 @@ module.exports = function(app)
     {
       if(err)
       {
-        response.status(500).send({error: 'query failed'})
+        response.status(500).send({error: err})
       }
 
       else if(res.length > 0)
@@ -41,8 +40,6 @@ module.exports = function(app)
       }
     })
   })
-
-  //----------------------- Add Meal-------------------------------//
 
   app.post('/addMeal', bP, function(request, response)
   {
@@ -119,7 +116,7 @@ module.exports = function(app)
 
       else if(res.length > 0)
       {
-        response.status(400).send({error: name + ' role exists. Check for getAllRoles request to learn more.'})
+        response.status(400).send({error: name + ' role exists.'})
       }
 
       else
