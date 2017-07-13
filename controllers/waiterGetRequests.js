@@ -1,6 +1,6 @@
 const Promise = require('bluebird')
 const pool = require('../connection/pool')
-const Errors = require('./errors')
+
 module.exports = function(app)
 {
   app.get('/getMealCategories', function(request, response)
@@ -26,7 +26,7 @@ module.exports = function(app)
 
   app.get('/getAllMeals', function(request, response)
   {
-    const _query = 'select id, name, price from meals'
+    const _query = 'select id, name, categoryid, price from meals'
     pool.query(_query, function(err, res)
     {
       if(err)
@@ -52,7 +52,7 @@ module.exports = function(app)
     if(Number.isInteger(parseInt(inp)) && inp > 0)
     {
       const categoryid = parseInt(inp)
-      const _query = 'select m.id as id, m.name as name, m.price as price from meals m inner join categories c ' +
+      const _query = 'select m.id as id, m.name as name, m.categoryid, m.price as price from meals m inner join categories c ' +
       'on c.id = m.categoryid where c.id = ' + pool.escape(categoryid)
       pool.query(_query, function(err, res)
       {
@@ -86,7 +86,7 @@ module.exports = function(app)
     if(Number.isInteger(parseInt(inp)) && inp > 0)
     {
       const mealid = parseInt(inp)
-      const _query = 'select id, name, price from meals where id = ' + pool.escape(mealid)
+      const _query = 'select id, name, categoryid, price from meals where id = ' + pool.escape(mealid)
       pool.query(_query, function(err, res)
       {
         if(err)
@@ -146,6 +146,7 @@ module.exports = function(app)
       'm.id as mealid, m.name as mealname, m.price as mealprice from orders o inner join ' +
       'mealfororders mfo on o.id = mfo.orderid inner join meals m on m.id = mfo.mealid ' +
       'where o.userid = ' + pool.escape(userid)
+
       pool.query(_query, function(err, res)
       {
         if(err)
@@ -155,7 +156,39 @@ module.exports = function(app)
 
         else if(res.length > 0)
         {
-          response.json(res)
+          var ob = JSON.parse(JSON.stringify(res))
+          var last = []
+          var t = {}
+          var oid = ob[0].id
+          var count = 0
+          var meal = {}
+          t.meals = []
+          for(var i = 0; i < ob.length; i++)
+          {
+            if(oid != ob[i].id)
+            {
+              oid = ob[i].id
+              last.push(t)
+              console.log("T -> " + t);
+              t = {}
+              t.meals = []
+            }
+
+            t.id = ob[i].id
+            t.waiterid = ob[i].waiterid
+            meal.mealid = ob[i].mealid
+            meal.mealname = ob[i].mealname
+            meal.mealprice = ob[i].mealprice
+            t.meals.push(meal)
+            meal = {}
+          }
+
+          if(t.length != 0)
+          {
+            last.push(t)
+          }
+
+          response.json(last)
         }
 
         else
@@ -201,7 +234,7 @@ module.exports = function(app)
         }
       })
     }
-    
+
     else
     {
       response.send({result: "Incorrect Integer value " + inp})
