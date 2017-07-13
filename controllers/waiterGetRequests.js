@@ -144,7 +144,7 @@ module.exports = function(app)
 
       const _query = 'select o.id as id, o.userid as waiterid, o.tableid as tableid, ' +
       'm.id as mealid, m.name as mealname, m.price as mealprice from orders o inner join ' +
-      'mealfororders mfo on o.id = mfo.orderid inner join meals m on m.id = mfo.mealid ' +
+      'mealfororder mfo on o.id = mfo.orderid inner join meals m on m.id = mfo.mealid ' +
       'where o.userid = ' + pool.escape(userid)
 
       pool.query(_query, function(err, res)
@@ -213,7 +213,7 @@ module.exports = function(app)
       const orderid = parseInt(inp)
       const _query = 'select o.id as orderId, sum(m.price) as orderSum, ' +
       'round(sum(m.price) * 0.15) as serviceFee, (sum(m.price) + round(sum(m.price) * 0.15)) as totalSum ' +
-      'from meals m inner join mealfororders mfo on mfo.mealid = m.id inner join orders o on o.id = mfo.orderid ' +
+      'from meals m inner join mealfororder mfo on mfo.mealid = m.id inner join orders o on o.id = mfo.orderid ' +
       'where o.id = ' + pool.escape(orderid)
 
       pool.query(_query, function(err, res)
