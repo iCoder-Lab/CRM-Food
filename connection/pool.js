@@ -11,7 +11,10 @@ var pool = mysql.createConnection
 pool.connect(function(error)
 {
   console.log('connected to db, CRM-Food');
-  if (error) throw error;
+  if (error) {
+    console.log(' Error when connecting to db:' + error)
+    setTimeout(handleDisconnect, 1000)
+  }
 })
 
 module.exports = pool
