@@ -1,5 +1,4 @@
-var express = require('express')
-var app = express()
+var app = require('express')()
 
 var waiterGetRequests = require('./controllers/waiterGetRequests')
 var waiterPostRequests = require('./controllers/waiterPostRequests')

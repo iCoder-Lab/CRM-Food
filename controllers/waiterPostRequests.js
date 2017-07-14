@@ -13,7 +13,7 @@ module.exports = function(app) {
         response.status(500).send({error: 'query failed: ' + error})
       }
       else {
-        response.send({message: 'order has been added.'})
+        response.send({error: ''})
       }
     })
   })
@@ -31,6 +31,6 @@ module.exports = function(app) {
         }
       })
     }
-    response.json({message: 'meals have been added.'})
+    response.json({error: ''})
   })
 }
