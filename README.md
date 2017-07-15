@@ -1,19 +1,16 @@
 # CRM-Food. 
-
-## Admin: 
-
-# Get requests
-
- * /getNewOrders
-
- * /getInProgressOrders
-
- * /getDoneOrders
-
-# Post requests
 There are three roles: admin, waiter and cooker 
 
-### post requests
+## Admin: 
+# Get requests
+ * /getNewOrders
+     - returns Array< Order >
+ * /getInProgressOrders
+     - returns Array< Order >
+ * /getDoneOrders
+     - returns Array< Order >
+
+# Post requests
  * /addTable  
      - takes Table
  * /addUser 
@@ -22,13 +19,9 @@ There are three roles: admin, waiter and cooker
      - takes MealCategory  
  * /addMeal 
      - takes Meal      
-
- 
- ### get requests
   
 ## Waiter:
-
- ### get requests
+ # get requests
   * /getMealCategories 
      - returns Array< MealCategory >
   * /getMealsByCategory/{ MealCategoryId }  
@@ -44,18 +37,15 @@ There are three roles: admin, waiter and cooker
   * /getAllRoles 
      - returns Array< Role >
   
- ### post requests
+ # post requests
   * /addOrder 
-      - Order             
+      - takes Order             
   * /addMealsToOrder/{OrderId}
-  
-    Example, /addMealsToOrder: 
-       {
+      - {
           "orderid": 1,
           "meals" : [ 1, 2, 3 ]   //Array of meal ids
-       }
-       
-        
+        }
+               
   
 ## Sockets
   * /delivered
@@ -64,6 +54,7 @@ There are three roles: admin, waiter and cooker
     -> Orderid, Mealid
   * /doneCooking
     -> Orderid, Mealid
+    
     
 # Models
  
