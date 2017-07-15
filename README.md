@@ -4,11 +4,11 @@
 
 # Get requests
 
-Orders:       /getNewOrders
+ * /getNewOrders
 
-Orders:       /getInProgressOrders
+ * /getInProgressOrders
 
-Orders:       /getDoneOrders
+ * /getDoneOrders
 
 # Post requests
 There are three roles: admin, waiter and cooker 
