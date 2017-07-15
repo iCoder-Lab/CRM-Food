@@ -14,10 +14,14 @@ Orders:       /getDoneOrders
 There are three roles: admin, waiter and cooker 
 
 ### post requests
- * /addTable  (Table)   
- * /addUser (User) -> 
- * /addMealCategory (MealCategory)  
- * /addMeal (Meal)      
+ * /addTable  
+     - takes Table
+ * /addUser 
+     - takes User
+ * /addMealCategory 
+     - takes MealCategory  
+ * /addMeal 
+     - takes Meal      
 
  
  ### get requests
@@ -25,17 +29,25 @@ There are three roles: admin, waiter and cooker
 ## Waiter:
 
  ### get requests
-  * /getMealCategories returns Array< MealCategory >
-  * /getMealsByCategory/{ MealCategoryId }  returns Array< Meal >
-  * /getMealById/{mealid} returns Meal
-  * /getMyOrders/{userid} returns Array< Order > 
-  * /getCheck/{Orderid} returns Check
-  * /getAllMeals returns Array< Meal >
-  * /getAllRoles returns Array< Role >
+  * /getMealCategories 
+     - returns Array< MealCategory >
+  * /getMealsByCategory/{ MealCategoryId }  
+     - returns Array< Meal >
+  * /getMealById/{mealid} 
+     - returns Meal
+  * /getMyOrders/{userid} 
+     - returns Array< Order > 
+  * /getCheck/{Orderid} 
+     - returns Check
+  * /getAllMeals 
+     - returns Array< Meal >
+  * /getAllRoles 
+     - returns Array< Role >
   
  ### post requests
-  * /addOrder (Order)              //No meals
-  * /addMealsToOrder/(Order with id) 
+  * /addOrder 
+      - Order             
+  * /addMealsToOrder/{OrderId}
   
     Example, /addMealsToOrder: 
        {
