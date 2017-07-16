@@ -6,16 +6,23 @@ CREATE TABLE `roles` (
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+------------------------------
+
+CREATE TABLE `servicepercentage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `percentage` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `roleid` int(11) NULL,
+  `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `dateofadd` TIMESTAMP NULL DEFAULT CURDATE(),
-  `name` varchar(255) NOT NULL,
   `phone` varchar(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `roleid` (`roleid`),
@@ -49,10 +56,16 @@ CREATE TABLE `tables` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 -------------------------------
 
+CREATE TABLE `statuses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
+
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `status` tinyint(4) NOT NULL,
-  `userid` int(11) NOT NULL,
+  `waiterid` int(11) NOT NULL,
   `tableid` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -68,6 +81,7 @@ CREATE TABLE `orders` (
 CREATE TABLE `mealfororder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orderid` int(11) NOT NULL,
+  `statusid` tinyint(4) NOT NULL,
   `mealid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`orderid`)
@@ -76,5 +90,19 @@ CREATE TABLE `mealfororder` (
   FOREIGN KEY (`mealid`)
         REFERENCES meals(`id`)
         ON DELETE CASCADE
+  FOREIGN KEY (`statusid`)
+        REFERENCES statuses(`id`)
+        ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 ------------------------------
+
+CREATE TABLE `checks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `orderid` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`orderid`)
+        REFERENCES orders(`id`)
+        ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
