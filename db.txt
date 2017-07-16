@@ -22,8 +22,8 @@ CREATE TABLE `users` (
   `surname` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `dateofadd` TIMESTAMP NULL DEFAULT CURDATE(),
-  `phone` varchar(255) NULL DEFAULT NULL,
+  `dateofadd` TIMESTAMP DEFAULT CURDATE(),
+  `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `roleid` (`roleid`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`roleid`) REFERENCES `roles` (`id`)
