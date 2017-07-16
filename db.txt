@@ -22,13 +22,13 @@ CREATE TABLE `users` (
   `surname` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `dateofadd` TIMESTAMP DEFAULT CURDATE(),
+  `dateofadd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`roleid`) 
     REFERENCES `roles` (`id`)
     ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `categories` (
@@ -70,7 +70,7 @@ CREATE TABLE `orders` (
   `tableid` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  FOREIGN KEY (`userid`)
+  FOREIGN KEY (`waiterid`)
         REFERENCES users(`id`)
         ON DELETE CASCADE,
   FOREIGN KEY (`tableid`)
@@ -82,7 +82,7 @@ CREATE TABLE `orders` (
 CREATE TABLE `mealfororder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orderid` int(11) NOT NULL,
-  `statusid` tinyint(4) NOT NULL,
+  `statusid` int(11) NOT NULL,
   `mealid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`orderid`)
@@ -90,7 +90,7 @@ CREATE TABLE `mealfororder` (
         ON DELETE CASCADE,
   FOREIGN KEY (`mealid`)
         REFERENCES meals(`id`)
-        ON DELETE CASCADE
+        ON DELETE CASCADE,
   FOREIGN KEY (`statusid`)
         REFERENCES statuses(`id`)
         ON DELETE CASCADE
