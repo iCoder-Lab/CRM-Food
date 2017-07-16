@@ -10,7 +10,7 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `servicepercentage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `percentage` varchar(255) DEFAULT NULL,
+  `percentage` INT DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 -------------------------------
@@ -25,8 +25,9 @@ CREATE TABLE `users` (
   `dateofadd` TIMESTAMP DEFAULT CURDATE(),
   `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `roleid` (`roleid`),
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`roleid`) REFERENCES `roles` (`id`)
+  FOREIGN KEY (`roleid`) 
+    REFERENCES `roles` (`id`)
+    ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8
 -------------------------------
 
