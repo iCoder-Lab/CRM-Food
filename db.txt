@@ -38,11 +38,19 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 -------------------------------
 
+CREATE TABLE `departments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+-------------------------------
+
 CREATE TABLE `meals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `categoryid` int(11) NOT NULL,
   `price` int(11) NOT NULL,
+  `departmentid` int(11) NOT NULL, 
   PRIMARY KEY (`id`),
   FOREIGN KEY (`categoryid`)
         REFERENCES categories(`id`)
@@ -68,6 +76,7 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `waiterid` int(11) NOT NULL,
   `tableid` int(11) NOT NULL,
+  `isItOpen` BOOLEAN DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`waiterid`)
