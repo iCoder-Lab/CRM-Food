@@ -54,6 +54,9 @@ CREATE TABLE `meals` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`categoryid`)
         REFERENCES categories(`id`)
+        ON DELETE CASCADE,
+  FOREIGN KEY (`departmentid`)
+        REFERENCES departments(`id`)
         ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
 -------------------------------
