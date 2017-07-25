@@ -32,6 +32,17 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
+CREATE TABLE `tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(512) NOT NULL,
+  `userid` int(11) NOT NULL, 
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`userid`)
+        REFERENCES users(`id`)
+        ON DELETE SET DEFAULT -1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+------------------------------
+
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
