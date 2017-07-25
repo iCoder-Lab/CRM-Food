@@ -18,7 +18,7 @@ CREATE TABLE `variables` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `roleid` int(11) NOT NULL,
+  `roleid` int(11) NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
@@ -29,31 +29,20 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`roleid`) 
     REFERENCES `roles` (`id`)
-    ON DELETE SET DEFAULT -1
+    ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `tokens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` varchar(512) NOT NULL,
-  `userid` int(11) NOT NULL, 
+  `userid` int(11) NULL, 
   PRIMARY KEY (`id`),
   FOREIGN KEY (`userid`)
         REFERENCES users(`id`)
-        ON DELETE SET DEFAULT -1
+        ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 ------------------------------
-
-CREATE TABLE `categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `departmentid` int(11) NOT NULL, 
-  PRIMARY KEY (`id`),
-  FOREIGN KEY (`departmentid`)
-        REFERENCES departments(`id`)
-        ON DELETE SET DEFAULT -1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8
--------------------------------
 
 CREATE TABLE `departments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -62,16 +51,27 @@ CREATE TABLE `departments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `departmentid` int(11) NULL, 
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`departmentid`)
+        REFERENCES departments(`id`)
+        ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
+-------------------------------
+
 CREATE TABLE `meals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NULL,
-  `categoryid` int(11) NOT NULL,
+  `categoryid` int(11) NULL,
   `price` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`categoryid`)
         REFERENCES categories(`id`)
-        ON DELETE SET DEFAULT -1
+        ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
@@ -91,46 +91,46 @@ CREATE TABLE `statuses` (
 
 CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `waiterid` int(11) NOT NULL,
-  `tableid` int(11) NOT NULL,
+  `waiterid` int(11) NULL,
+  `tableid` int(11) NULL,
   `isItOpen` BOOLEAN DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`waiterid`)
         REFERENCES users(`id`)
-        ON DELETE SET DEFAULT -1,
+        ON DELETE SET NULL,
   FOREIGN KEY (`tableid`)
         REFERENCES tables(`id`)
-        ON DELETE SET DEFAULT -1
+        ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `mealfororder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderid` int(11) NOT NULL,
+  `orderid` int(11) NULL,
   `count` int(11) NOT NULL,
-  `statusid` int(11) NOT NULL,
-  `mealid` int(11) NOT NULL,
+  `statusid` int(11) NULL,
+  `mealid` int(11) NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`orderid`)
         REFERENCES orders(`id`)
-        ON DELETE SET DEFAULT -1,
+        ON DELETE SET NULL,
   FOREIGN KEY (`mealid`)
         REFERENCES meals(`id`)
-        ON DELETE SET DEFAULT -1,
+        ON DELETE SET NULL,
   FOREIGN KEY (`statusid`)
         REFERENCES statuses(`id`)
-        ON DELETE SET DEFAULT -1
+        ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 ------------------------------
 
 CREATE TABLE `checks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `orderid` int(11) NOT NULL,
+  `orderid` int(11) NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`orderid`)
         REFERENCES orders(`id`)
-        ON DELETE SET DEFAULT -1
+        ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
