@@ -3,7 +3,7 @@ CREATE DATABASE CRMFOOD;
 
 CREATE TABLE `roles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 ------------------------------
@@ -17,24 +17,29 @@ CREATE TABLE `servicepercentage` (
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `roleid` int(11) NULL,
+  `roleid` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
+  `email` varchar(255) NULL,
   `dateofadd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `phone` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`roleid`) 
     REFERENCES `roles` (`id`)
-    ON DELETE CASCADE
+    ON DELETE SET DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  `departmentid` int(11) NOT NULL, 
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`departmentid`)
+        REFERENCES departments(`id`)
+        ON DELETE SET DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
@@ -48,16 +53,13 @@ CREATE TABLE `departments` (
 CREATE TABLE `meals` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `description` varchar(255) NULL,
   `categoryid` int(11) NOT NULL,
   `price` int(11) NOT NULL,
-  `departmentid` int(11) NOT NULL, 
   PRIMARY KEY (`id`),
   FOREIGN KEY (`categoryid`)
         REFERENCES categories(`id`)
-        ON DELETE CASCADE,
-  FOREIGN KEY (`departmentid`)
-        REFERENCES departments(`id`)
-        ON DELETE CASCADE
+        ON DELETE SET DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
@@ -72,7 +74,7 @@ CREATE TABLE `statuses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `orders` (
@@ -84,28 +86,29 @@ CREATE TABLE `orders` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`waiterid`)
         REFERENCES users(`id`)
-        ON DELETE CASCADE,
+        ON DELETE SET DEFAULT -1,
   FOREIGN KEY (`tableid`)
         REFERENCES tables(`id`)
-        ON DELETE CASCADE
+        ON DELETE SET DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
 CREATE TABLE `mealfororder` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orderid` int(11) NOT NULL,
+  `count` int(11) NOT NULL,
   `statusid` int(11) NOT NULL,
   `mealid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`orderid`)
         REFERENCES orders(`id`)
-        ON DELETE CASCADE,
+        ON DELETE SET DEFAULT -1,
   FOREIGN KEY (`mealid`)
         REFERENCES meals(`id`)
-        ON DELETE CASCADE,
+        ON DELETE SET DEFAULT -1,
   FOREIGN KEY (`statusid`)
         REFERENCES statuses(`id`)
-        ON DELETE CASCADE
+        ON DELETE SET DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 ------------------------------
 
@@ -116,6 +119,6 @@ CREATE TABLE `checks` (
   PRIMARY KEY (`id`),
   FOREIGN KEY (`orderid`)
         REFERENCES orders(`id`)
-        ON DELETE CASCADE
+        ON DELETE SET DEFAULT -1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
