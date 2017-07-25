@@ -8,9 +8,10 @@ CREATE TABLE `roles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 ------------------------------
 
-CREATE TABLE `servicepercentage` (
+CREATE TABLE `variables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `percentage` INT DEFAULT 0,
+  `name` varchar(255) NOT NULL,
+  `value` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
