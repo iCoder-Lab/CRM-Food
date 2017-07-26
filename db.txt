@@ -93,7 +93,7 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `waiterid` int(11) NULL,
   `tableid` int(11) NULL,
-  `isItOpen` BOOLEAN DEFAULT NULL,
+  `isitopen` BOOLEAN DEFAULT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   FOREIGN KEY (`waiterid`)
