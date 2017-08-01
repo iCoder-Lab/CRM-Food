@@ -18,7 +18,7 @@ CREATE TABLE `variables` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `value` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
 
@@ -36,7 +36,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NULL,
   `dateofadd` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `phone` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`login`),
   FOREIGN KEY (`roleid`) 
     REFERENCES `roles` (`id`)
     ON DELETE SET NULL
@@ -65,7 +65,7 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `departmentid` int(11) NULL, 
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`departmentid`),
   FOREIGN KEY (`departmentid`)
         REFERENCES departments(`id`)
         ON DELETE SET NULL
@@ -127,7 +127,7 @@ CREATE TABLE `mealfororder` (
   `count` int(11) NOT NULL,
   `statusid` int(11) NULL,
   `mealid` int(11) NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`orderid`, mealid),
   FOREIGN KEY (`orderid`)
         REFERENCES orders(`id`)
         ON DELETE SET NULL,
@@ -144,7 +144,7 @@ CREATE TABLE `checks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orderid` int(11) NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`orderid`),
   FOREIGN KEY (`orderid`)
         REFERENCES orders(`id`)
         ON DELETE SET NULL
