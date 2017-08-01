@@ -64,8 +64,8 @@ CREATE TABLE `departments` (
 CREATE TABLE `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `departmentid` int(11) NULL, 
-  PRIMARY KEY (`id`, `departmentid`),
+  `departmentid` int(11), 
+  PRIMARY KEY (`id`),
   FOREIGN KEY (`departmentid`)
         REFERENCES departments(`id`)
         ON DELETE SET NULL
@@ -111,7 +111,7 @@ CREATE TABLE `orders` (
   `tableid` int(11) NULL,
   `isitopen` BOOLEAN DEFAULT True,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `waiterid`),
+  PRIMARY KEY (`id`),
   FOREIGN KEY (`waiterid`)
         REFERENCES users(`id`)
         ON DELETE SET NULL,
@@ -127,7 +127,7 @@ CREATE TABLE `mealfororder` (
   `count` int(11) NOT NULL,
   `statusid` int(11) NULL,
   `mealid` int(11) NULL,
-  PRIMARY KEY (`id`, `orderid`, mealid),
+  PRIMARY KEY (`id`),
   FOREIGN KEY (`orderid`)
         REFERENCES orders(`id`)
         ON DELETE SET NULL,
@@ -144,7 +144,7 @@ CREATE TABLE `checks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orderid` int(11) NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`, `orderid`),
+  PRIMARY KEY (`id`),
   FOREIGN KEY (`orderid`)
         REFERENCES orders(`id`)
         ON DELETE SET NULL
