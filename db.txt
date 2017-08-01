@@ -150,3 +150,6 @@ CREATE TABLE `checks` (
         ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8
 -------------------------------
+
+CREATE INDEX orderid_index ON mealfororder(orderid);
+CREATE INDEX mealid_index ON mealfororder(mealid);
