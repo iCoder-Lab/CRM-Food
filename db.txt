@@ -121,7 +121,8 @@ CREATE TABLE `mealfororder` (
   `count` int(11) NOT NULL,
   `statusid` int(11) NOT NULL DEFAULT -1,
   `mealid` int(11) NOT NULL DEFAULT -1,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`orderid`, `mealid`),
+  KEY (`id`),
   FOREIGN KEY (`orderid`)
         REFERENCES orders(`id`),
   FOREIGN KEY (`mealid`)
